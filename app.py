@@ -1,4 +1,3 @@
-from email import message
 from flask import Flask
 from flask_restful import Api, Resource, abort, reqparse, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
@@ -45,8 +44,7 @@ class contact(Resource):
             abort(404, message = 'contact not found')
         return result
     @marshal_with(contact_field)
-    def put(self, name):
-        
+    def put(self): 
         args = contact_args.parse_args()
         name = args['name']
         result = ContactDb.query.filter_by(name = args['name']).first()
